@@ -1,3 +1,1 @@
-# WebTaskManager
-
-Some text.
+# Web Task Manager
