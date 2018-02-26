@@ -1,3 +1,3 @@
 # Web Task Manager
 
-Evgeniy Lyakh's branch
+Valentine Demchuk's branch
