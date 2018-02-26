@@ -1,3 +1,3 @@
 # Web Task Manager
 
-master branch
+Master branch
