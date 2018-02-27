@@ -195,9 +195,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\WTM_database.mdf" />
-    <Content Include="App_Data\WTM_database_log.ldf">
-      <DependentUpon>WTM_database.mdf</DependentUpon>
+    <Content Include="App_Data\WTM_Database.mdf" />
+    <Content Include="App_Data\WTM_Database_log.ldf">
+      <DependentUpon>WTM_Database.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
