@@ -1,0 +1,32 @@
+Msg 1785, Level 16, State 0, Line 207
+Introducing FOREIGN KEY constraint 'TaskList_fk0' on table 'TaskList' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Msg 1750, Level 16, State 1, Line 207
+Could not create constraint or index. See previous errors.
+Msg 4917, Level 16, State 0, Line 210
+Constraint 'TaskList_fk0' does not exist.
+Msg 4916, Level 16, State 0, Line 210
+Could not enable or disable the constraint. See previous errors.
+Msg 1785, Level 16, State 0, Line 224
+Introducing FOREIGN KEY constraint 'Doer_fk0' on table 'Doer' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Msg 1750, Level 16, State 1, Line 224
+Could not create constraint or index. See previous errors.
+Msg 4917, Level 16, State 0, Line 227
+Constraint 'Doer_fk0' does not exist.
+Msg 4916, Level 16, State 0, Line 227
+Could not enable or disable the constraint. See previous errors.
+Msg 1785, Level 16, State 0, Line 230
+Introducing FOREIGN KEY constraint 'ListFilter_fk0' on table 'ListFilter' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Msg 1750, Level 16, State 1, Line 230
+Could not create constraint or index. See previous errors.
+Msg 4917, Level 16, State 0, Line 233
+Constraint 'ListFilter_fk0' does not exist.
+Msg 4916, Level 16, State 0, Line 233
+Could not enable or disable the constraint. See previous errors.
+Msg 1785, Level 16, State 0, Line 235
+Introducing FOREIGN KEY constraint 'ListFilter_fk1' on table 'ListFilter' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Msg 1750, Level 16, State 1, Line 235
+Could not create constraint or index. See previous errors.
+Msg 4917, Level 16, State 0, Line 238
+Constraint 'ListFilter_fk1' does not exist.
+Msg 4916, Level 16, State 0, Line 238
+Could not enable or disable the constraint. See previous errors.
