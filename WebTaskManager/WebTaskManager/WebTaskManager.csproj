@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -189,8 +191,56 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Doer.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\File.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ListFilter.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Priority.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Schedule.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Status.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subtask.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Task.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskList.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WTM_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTM_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WTM_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WTM_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WTM_Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -205,10 +255,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\WTM_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WTM_Model.edmx</DependentUpon>
+      <LastGenOutput>WTM_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WTM_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WTM_Model.edmx</DependentUpon>
+      <LastGenOutput>WTM_Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\WTM_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WTM_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WTM_Model.edmx.diagram">
+      <DependentUpon>WTM_Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -255,7 +322,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
