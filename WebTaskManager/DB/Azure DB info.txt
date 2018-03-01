@@ -1,0 +1,6 @@
+
+Database name: wtm_db
+
+Server name: wtm-server.database.windows.net
+Server admin login: wtm_admin
+Password: IT-Step_2018

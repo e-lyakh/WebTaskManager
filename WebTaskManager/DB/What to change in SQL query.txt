@@ -1,0 +1,5 @@
+boolean -> BIT
+binary -> BIT
+false -> 0
+true -> 1
+ON UPDATE CASCADE -> ON UPDATE NO ACTION (last block, 4 un.)
