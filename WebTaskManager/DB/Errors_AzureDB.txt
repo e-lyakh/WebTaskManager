@@ -1,0 +1,18 @@
+Msg 257, Level 16, State 3, Line 133
+Implicit conversion from data type varchar to binary is not allowed. Use the CONVERT function to run this query.
+Msg 1767, Level 16, State 0, Line 212
+Foreign key 'TaskList_fk1' references invalid table 'ListFilter'.
+Msg 1750, Level 16, State 1, Line 212
+Could not create constraint or index. See previous errors.
+Msg 4917, Level 16, State 0, Line 215
+Constraint 'TaskList_fk1' does not exist.
+Msg 4916, Level 16, State 0, Line 215
+Could not enable or disable the constraint. See previous errors.
+Msg 4902, Level 16, State 1, Line 230
+Cannot find the object "ListFilter" because it does not exist or you do not have permissions.
+Msg 4902, Level 16, State 1, Line 233
+Cannot find the object "ListFilter" because it does not exist or you do not have permissions.
+Msg 4902, Level 16, State 1, Line 235
+Cannot find the object "ListFilter" because it does not exist or you do not have permissions.
+Msg 4902, Level 16, State 1, Line 238
+Cannot find the object "ListFilter" because it does not exist or you do not have permissions.

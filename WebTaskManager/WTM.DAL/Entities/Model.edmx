@@ -1,0 +1,985 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Doer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListFilter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Is_Show_Completed" Type="bit" Nullable="false" />
+          <Property Name="Is_Ordered_Term" Type="bit" Nullable="false" />
+          <Property Name="Is_Ordered_Prior" Type="bit" Nullable="false" />
+          <Property Name="Is_Ordered_Tag" Type="bit" Nullable="false" />
+          <Property Name="Selected_From_Date" Type="date" />
+          <Property Name="Selected_To_Date" Type="date" />
+          <Property Name="Selected_Prior_Id" Type="int" />
+          <Property Name="Selected_Tag_Id" Type="int" Nullable="false" />
+          <Property Name="Is_Only_Favorites" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RepeatTerm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Repeat_Term" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Order_In_List" Type="int" Nullable="false" />
+          <Property Name="Is_Completed" Type="bit" Nullable="false" />
+          <Property Name="Task_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Guid" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Attach_Date" Type="datetime" Nullable="false" />
+          <Property Name="Task_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="List_Id" Type="int" Nullable="false" />
+          <Property Name="Order_In_List" Type="int" Nullable="false" />
+          <Property Name="Is_Favorite" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
+          <Property Name="Delete_Date" Type="datetime" Nullable="false" />
+          <Property Name="Schedule_Id" Type="int" Nullable="false" />
+          <Property Name="Priority_Id" Type="int" Nullable="false" />
+          <Property Name="Tag_Id" Type="int" Nullable="false" />
+          <Property Name="Status_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Doer_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Order_Rank" Type="int" Nullable="false" />
+          <Property Name="Color_R" Type="int" Nullable="false" />
+          <Property Name="Color_G" Type="int" Nullable="false" />
+          <Property Name="Color_B" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Filter_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskPriority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Start_Term" Type="datetime" />
+          <Property Name="End_Term" Type="datetime" />
+          <Property Name="Is_Reminder_On" Type="bit" />
+          <Property Name="Reminder_Time" Type="datetime" />
+          <Property Name="RepeatTerm_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="64" />
+          <Property Name="Is_Email_Notified" Type="bit" />
+          <Property Name="Registration_Date" Type="datetime" Nullable="false" />
+          <Property Name="Last_Visit_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="Doer_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Doer" Type="Self.Doer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doer">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ListFilter_fk0">
+          <End Role="TaskPriority" Type="Self.TaskPriority" Multiplicity="0..1" />
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskPriority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListFilter">
+              <PropertyRef Name="Selected_Prior_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ListFilter_fk1">
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListFilter">
+              <PropertyRef Name="Selected_Tag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subtask_fk0">
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="Task_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskFile_fk0">
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="1" />
+          <End Role="TaskFile" Type="Self.TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskFile">
+              <PropertyRef Name="Task_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk0">
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="List_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk1">
+          <End Role="TaskSchedule" Type="Self.TaskSchedule" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Schedule_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk2">
+          <End Role="TaskPriority" Type="Self.TaskPriority" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskPriority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Priority_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk3">
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Tag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk4">
+          <End Role="TaskStatus" Type="Self.TaskStatus" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk5">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk6">
+          <End Role="Doer" Type="Self.Doer" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Doer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskList_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskList">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskList_fk1">
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="1" />
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListFilter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskList">
+              <PropertyRef Name="Filter_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskSchedule_fk0">
+          <End Role="RepeatTerm" Type="Self.RepeatTerm" Multiplicity="1" />
+          <End Role="TaskSchedule" Type="Self.TaskSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepeatTerm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskSchedule">
+              <PropertyRef Name="RepeatTerm_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbModelStoreContainer">
+          <EntitySet Name="Doer" EntityType="Self.Doer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListFilter" EntityType="Self.ListFilter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepeatTerm" EntityType="Self.RepeatTerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subtask" EntityType="Self.Subtask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskFile" EntityType="Self.TaskFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskItem" EntityType="Self.TaskItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskList" EntityType="Self.TaskList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskPriority" EntityType="Self.TaskPriority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskSchedule" EntityType="Self.TaskSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskStatus" EntityType="Self.TaskStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTag" EntityType="Self.TaskTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Doer_fk0" Association="Self.Doer_fk0">
+            <End Role="User" EntitySet="User" />
+            <End Role="Doer" EntitySet="Doer" />
+          </AssociationSet>
+          <AssociationSet Name="ListFilter_fk0" Association="Self.ListFilter_fk0">
+            <End Role="TaskPriority" EntitySet="TaskPriority" />
+            <End Role="ListFilter" EntitySet="ListFilter" />
+          </AssociationSet>
+          <AssociationSet Name="ListFilter_fk1" Association="Self.ListFilter_fk1">
+            <End Role="TaskTag" EntitySet="TaskTag" />
+            <End Role="ListFilter" EntitySet="ListFilter" />
+          </AssociationSet>
+          <AssociationSet Name="Subtask_fk0" Association="Self.Subtask_fk0">
+            <End Role="TaskItem" EntitySet="TaskItem" />
+            <End Role="Subtask" EntitySet="Subtask" />
+          </AssociationSet>
+          <AssociationSet Name="TaskFile_fk0" Association="Self.TaskFile_fk0">
+            <End Role="TaskItem" EntitySet="TaskItem" />
+            <End Role="TaskFile" EntitySet="TaskFile" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk0" Association="Self.TaskItem_fk0">
+            <End Role="TaskList" EntitySet="TaskList" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk1" Association="Self.TaskItem_fk1">
+            <End Role="TaskSchedule" EntitySet="TaskSchedule" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk2" Association="Self.TaskItem_fk2">
+            <End Role="TaskPriority" EntitySet="TaskPriority" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk3" Association="Self.TaskItem_fk3">
+            <End Role="TaskTag" EntitySet="TaskTag" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk4" Association="Self.TaskItem_fk4">
+            <End Role="TaskStatus" EntitySet="TaskStatus" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk5" Association="Self.TaskItem_fk5">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk6" Association="Self.TaskItem_fk6">
+            <End Role="Doer" EntitySet="Doer" />
+            <End Role="TaskItem" EntitySet="TaskItem" />
+          </AssociationSet>
+          <AssociationSet Name="TaskList_fk0" Association="Self.TaskList_fk0">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskList" EntitySet="TaskList" />
+          </AssociationSet>
+          <AssociationSet Name="TaskList_fk1" Association="Self.TaskList_fk1">
+            <End Role="ListFilter" EntitySet="ListFilter" />
+            <End Role="TaskList" EntitySet="TaskList" />
+          </AssociationSet>
+          <AssociationSet Name="TaskSchedule_fk0" Association="Self.TaskSchedule_fk0">
+            <End Role="RepeatTerm" EntitySet="RepeatTerm" />
+            <End Role="TaskSchedule" EntitySet="TaskSchedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Doer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.Doer_fk0" FromRole="Doer" ToRole="User" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk6" FromRole="Doer" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="ListFilter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Show_Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Is_Ordered_Term" Type="Boolean" Nullable="false" />
+          <Property Name="Is_Ordered_Prior" Type="Boolean" Nullable="false" />
+          <Property Name="Is_Ordered_Tag" Type="Boolean" Nullable="false" />
+          <Property Name="Selected_From_Date" Type="DateTime" Precision="0" />
+          <Property Name="Selected_To_Date" Type="DateTime" Precision="0" />
+          <Property Name="Selected_Prior_Id" Type="Int32" />
+          <Property Name="Selected_Tag_Id" Type="Int32" Nullable="false" />
+          <Property Name="Is_Only_Favorites" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TaskPriority" Relationship="Self.ListFilter_fk0" FromRole="ListFilter" ToRole="TaskPriority" />
+          <NavigationProperty Name="TaskTag" Relationship="Self.ListFilter_fk1" FromRole="ListFilter" ToRole="TaskTag" />
+          <NavigationProperty Name="TaskLists" Relationship="Self.TaskList_fk1" FromRole="ListFilter" ToRole="TaskList" />
+        </EntityType>
+        <EntityType Name="RepeatTerm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Repeat_Term" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TaskSchedules" Relationship="Self.TaskSchedule_fk0" FromRole="RepeatTerm" ToRole="TaskSchedule" />
+        </EntityType>
+        <EntityType Name="Subtask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Order_In_List" Type="Int32" Nullable="false" />
+          <Property Name="Is_Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Task_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskItem" Relationship="Self.Subtask_fk0" FromRole="Subtask" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="TaskFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Guid" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Attach_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Task_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskItem" Relationship="Self.TaskFile_fk0" FromRole="TaskFile" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="TaskItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="List_Id" Type="Int32" Nullable="false" />
+          <Property Name="Order_In_List" Type="Int32" Nullable="false" />
+          <Property Name="Is_Favorite" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Delete_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Schedule_Id" Type="Int32" Nullable="false" />
+          <Property Name="Priority_Id" Type="Int32" Nullable="false" />
+          <Property Name="Tag_Id" Type="Int32" Nullable="false" />
+          <Property Name="Status_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="Doer_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doer" Relationship="Self.TaskItem_fk6" FromRole="TaskItem" ToRole="Doer" />
+          <NavigationProperty Name="Subtasks" Relationship="Self.Subtask_fk0" FromRole="TaskItem" ToRole="Subtask" />
+          <NavigationProperty Name="TaskFiles" Relationship="Self.TaskFile_fk0" FromRole="TaskItem" ToRole="TaskFile" />
+          <NavigationProperty Name="TaskList" Relationship="Self.TaskItem_fk0" FromRole="TaskItem" ToRole="TaskList" />
+          <NavigationProperty Name="TaskSchedule" Relationship="Self.TaskItem_fk1" FromRole="TaskItem" ToRole="TaskSchedule" />
+          <NavigationProperty Name="TaskPriority" Relationship="Self.TaskItem_fk2" FromRole="TaskItem" ToRole="TaskPriority" />
+          <NavigationProperty Name="TaskTag" Relationship="Self.TaskItem_fk3" FromRole="TaskItem" ToRole="TaskTag" />
+          <NavigationProperty Name="TaskStatu" Relationship="Self.TaskItem_fk4" FromRole="TaskItem" ToRole="TaskStatus" />
+          <NavigationProperty Name="User" Relationship="Self.TaskItem_fk5" FromRole="TaskItem" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Order_Rank" Type="Int32" Nullable="false" />
+          <Property Name="Color_R" Type="Int32" Nullable="false" />
+          <Property Name="Color_G" Type="Int32" Nullable="false" />
+          <Property Name="Color_B" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="Filter_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListFilter" Relationship="Self.TaskList_fk1" FromRole="TaskList" ToRole="ListFilter" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk0" FromRole="TaskList" ToRole="TaskItem" />
+          <NavigationProperty Name="User" Relationship="Self.TaskList_fk0" FromRole="TaskList" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskPriority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListFilters" Relationship="Self.ListFilter_fk0" FromRole="TaskPriority" ToRole="ListFilter" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk2" FromRole="TaskPriority" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="TaskSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Start_Term" Type="DateTime" Precision="3" />
+          <Property Name="End_Term" Type="DateTime" Precision="3" />
+          <Property Name="Is_Reminder_On" Type="Boolean" />
+          <Property Name="Reminder_Time" Type="DateTime" Precision="3" />
+          <Property Name="RepeatTerm_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RepeatTerm" Relationship="Self.TaskSchedule_fk0" FromRole="TaskSchedule" ToRole="RepeatTerm" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk1" FromRole="TaskSchedule" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="TaskStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk4" FromRole="TaskStatus" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="TaskTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ListFilters" Relationship="Self.ListFilter_fk1" FromRole="TaskTag" ToRole="ListFilter" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk3" FromRole="TaskTag" ToRole="TaskItem" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Email_Notified" Type="Boolean" />
+          <Property Name="Registration_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Last_Visit_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Doers" Relationship="Self.Doer_fk0" FromRole="User" ToRole="Doer" />
+          <NavigationProperty Name="TaskItems" Relationship="Self.TaskItem_fk5" FromRole="User" ToRole="TaskItem" />
+          <NavigationProperty Name="TaskLists" Relationship="Self.TaskList_fk0" FromRole="User" ToRole="TaskList" />
+        </EntityType>
+        <Association Name="Doer_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Doer" Type="Self.Doer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doer">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk6">
+          <End Role="Doer" Type="Self.Doer" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Doer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ListFilter_fk0">
+          <End Role="TaskPriority" Type="Self.TaskPriority" Multiplicity="0..1" />
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskPriority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListFilter">
+              <PropertyRef Name="Selected_Prior_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ListFilter_fk1">
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListFilter">
+              <PropertyRef Name="Selected_Tag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskList_fk1">
+          <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="1" />
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListFilter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskList">
+              <PropertyRef Name="Filter_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskSchedule_fk0">
+          <End Role="RepeatTerm" Type="Self.RepeatTerm" Multiplicity="1" />
+          <End Role="TaskSchedule" Type="Self.TaskSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepeatTerm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskSchedule">
+              <PropertyRef Name="RepeatTerm_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subtask_fk0">
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="1" />
+          <End Role="Subtask" Type="Self.Subtask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subtask">
+              <PropertyRef Name="Task_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskFile_fk0">
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="1" />
+          <End Role="TaskFile" Type="Self.TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskFile">
+              <PropertyRef Name="Task_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk0">
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="List_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk1">
+          <End Role="TaskSchedule" Type="Self.TaskSchedule" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Schedule_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk2">
+          <End Role="TaskPriority" Type="Self.TaskPriority" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskPriority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Priority_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk3">
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Tag_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk4">
+          <End Role="TaskStatus" Type="DbModel.TaskStatus" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskItem_fk5">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskItem">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TaskList_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskList" Type="Self.TaskList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskList">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WtmDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Doers" EntityType="Self.Doer" />
+          <EntitySet Name="ListFilters" EntityType="Self.ListFilter" />
+          <EntitySet Name="RepeatTerms" EntityType="Self.RepeatTerm" />
+          <EntitySet Name="Subtasks" EntityType="Self.Subtask" />
+          <EntitySet Name="TaskFiles" EntityType="Self.TaskFile" />
+          <EntitySet Name="TaskItems" EntityType="Self.TaskItem" />
+          <EntitySet Name="TaskLists" EntityType="Self.TaskList" />
+          <EntitySet Name="TaskPriorities" EntityType="Self.TaskPriority" />
+          <EntitySet Name="TaskSchedules" EntityType="Self.TaskSchedule" />
+          <EntitySet Name="TaskStatus1" EntityType="DbModel.TaskStatus" />
+          <EntitySet Name="TaskTags" EntityType="Self.TaskTag" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="Doer_fk0" Association="Self.Doer_fk0">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Doer" EntitySet="Doers" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk6" Association="Self.TaskItem_fk6">
+            <End Role="Doer" EntitySet="Doers" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="ListFilter_fk0" Association="Self.ListFilter_fk0">
+            <End Role="TaskPriority" EntitySet="TaskPriorities" />
+            <End Role="ListFilter" EntitySet="ListFilters" />
+          </AssociationSet>
+          <AssociationSet Name="ListFilter_fk1" Association="Self.ListFilter_fk1">
+            <End Role="TaskTag" EntitySet="TaskTags" />
+            <End Role="ListFilter" EntitySet="ListFilters" />
+          </AssociationSet>
+          <AssociationSet Name="TaskList_fk1" Association="Self.TaskList_fk1">
+            <End Role="ListFilter" EntitySet="ListFilters" />
+            <End Role="TaskList" EntitySet="TaskLists" />
+          </AssociationSet>
+          <AssociationSet Name="TaskSchedule_fk0" Association="Self.TaskSchedule_fk0">
+            <End Role="RepeatTerm" EntitySet="RepeatTerms" />
+            <End Role="TaskSchedule" EntitySet="TaskSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="Subtask_fk0" Association="Self.Subtask_fk0">
+            <End Role="TaskItem" EntitySet="TaskItems" />
+            <End Role="Subtask" EntitySet="Subtasks" />
+          </AssociationSet>
+          <AssociationSet Name="TaskFile_fk0" Association="Self.TaskFile_fk0">
+            <End Role="TaskItem" EntitySet="TaskItems" />
+            <End Role="TaskFile" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk0" Association="Self.TaskItem_fk0">
+            <End Role="TaskList" EntitySet="TaskLists" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk1" Association="Self.TaskItem_fk1">
+            <End Role="TaskSchedule" EntitySet="TaskSchedules" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk2" Association="Self.TaskItem_fk2">
+            <End Role="TaskPriority" EntitySet="TaskPriorities" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk3" Association="Self.TaskItem_fk3">
+            <End Role="TaskTag" EntitySet="TaskTags" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk4" Association="Self.TaskItem_fk4">
+            <End Role="TaskStatus" EntitySet="TaskStatus1" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskItem_fk5" Association="Self.TaskItem_fk5">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskItem" EntitySet="TaskItems" />
+          </AssociationSet>
+          <AssociationSet Name="TaskList_fk0" Association="Self.TaskList_fk0">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskList" EntitySet="TaskLists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="WtmDb">
+          <EntitySetMapping Name="Doers">
+            <EntityTypeMapping TypeName="DbModel.Doer">
+              <MappingFragment StoreEntitySet="Doer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListFilters">
+            <EntityTypeMapping TypeName="DbModel.ListFilter">
+              <MappingFragment StoreEntitySet="ListFilter">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Is_Show_Completed" ColumnName="Is_Show_Completed" />
+                <ScalarProperty Name="Is_Ordered_Term" ColumnName="Is_Ordered_Term" />
+                <ScalarProperty Name="Is_Ordered_Prior" ColumnName="Is_Ordered_Prior" />
+                <ScalarProperty Name="Is_Ordered_Tag" ColumnName="Is_Ordered_Tag" />
+                <ScalarProperty Name="Selected_From_Date" ColumnName="Selected_From_Date" />
+                <ScalarProperty Name="Selected_To_Date" ColumnName="Selected_To_Date" />
+                <ScalarProperty Name="Selected_Prior_Id" ColumnName="Selected_Prior_Id" />
+                <ScalarProperty Name="Selected_Tag_Id" ColumnName="Selected_Tag_Id" />
+                <ScalarProperty Name="Is_Only_Favorites" ColumnName="Is_Only_Favorites" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepeatTerms">
+            <EntityTypeMapping TypeName="DbModel.RepeatTerm">
+              <MappingFragment StoreEntitySet="RepeatTerm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Repeat_Term" ColumnName="Repeat_Term" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subtasks">
+            <EntityTypeMapping TypeName="DbModel.Subtask">
+              <MappingFragment StoreEntitySet="Subtask">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Order_In_List" ColumnName="Order_In_List" />
+                <ScalarProperty Name="Is_Completed" ColumnName="Is_Completed" />
+                <ScalarProperty Name="Task_Id" ColumnName="Task_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskFiles">
+            <EntityTypeMapping TypeName="DbModel.TaskFile">
+              <MappingFragment StoreEntitySet="TaskFile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Attach_Date" ColumnName="Attach_Date" />
+                <ScalarProperty Name="Task_Id" ColumnName="Task_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskItems">
+            <EntityTypeMapping TypeName="DbModel.TaskItem">
+              <MappingFragment StoreEntitySet="TaskItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="List_Id" ColumnName="List_Id" />
+                <ScalarProperty Name="Order_In_List" ColumnName="Order_In_List" />
+                <ScalarProperty Name="Is_Favorite" ColumnName="Is_Favorite" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
+                <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+                <ScalarProperty Name="Schedule_Id" ColumnName="Schedule_Id" />
+                <ScalarProperty Name="Priority_Id" ColumnName="Priority_Id" />
+                <ScalarProperty Name="Tag_Id" ColumnName="Tag_Id" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Doer_Id" ColumnName="Doer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskLists">
+            <EntityTypeMapping TypeName="DbModel.TaskList">
+              <MappingFragment StoreEntitySet="TaskList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Order_Rank" ColumnName="Order_Rank" />
+                <ScalarProperty Name="Color_R" ColumnName="Color_R" />
+                <ScalarProperty Name="Color_G" ColumnName="Color_G" />
+                <ScalarProperty Name="Color_B" ColumnName="Color_B" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Filter_Id" ColumnName="Filter_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskPriorities">
+            <EntityTypeMapping TypeName="DbModel.TaskPriority">
+              <MappingFragment StoreEntitySet="TaskPriority">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskSchedules">
+            <EntityTypeMapping TypeName="DbModel.TaskSchedule">
+              <MappingFragment StoreEntitySet="TaskSchedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Start_Term" ColumnName="Start_Term" />
+                <ScalarProperty Name="End_Term" ColumnName="End_Term" />
+                <ScalarProperty Name="Is_Reminder_On" ColumnName="Is_Reminder_On" />
+                <ScalarProperty Name="Reminder_Time" ColumnName="Reminder_Time" />
+                <ScalarProperty Name="RepeatTerm_Id" ColumnName="RepeatTerm_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskStatus1">
+            <EntityTypeMapping TypeName="DbModel.TaskStatus">
+              <MappingFragment StoreEntitySet="TaskStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTags">
+            <EntityTypeMapping TypeName="DbModel.TaskTag">
+              <MappingFragment StoreEntitySet="TaskTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Is_Email_Notified" ColumnName="Is_Email_Notified" />
+                <ScalarProperty Name="Registration_Date" ColumnName="Registration_Date" />
+                <ScalarProperty Name="Last_Visit_Date" ColumnName="Last_Visit_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
