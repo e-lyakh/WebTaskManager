@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Doer">
           <Key>
             <PropertyRef Name="Id" />
@@ -25,7 +25,7 @@
           <Property Name="Selected_From_Date" Type="date" />
           <Property Name="Selected_To_Date" Type="date" />
           <Property Name="Selected_Prior_Id" Type="int" />
-          <Property Name="Selected_Tag_Id" Type="int" Nullable="false" />
+          <Property Name="Selected_Tag_Id" Type="int" />
           <Property Name="Is_Only_Favorites" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RepeatTerm">
@@ -161,7 +161,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ListFilter_fk1">
-          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="0..1" />
           <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaskTag">
@@ -316,7 +316,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DbModelStoreContainer">
+        <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="Doer" EntityType="Self.Doer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListFilter" EntityType="Self.ListFilter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepeatTerm" EntityType="Self.RepeatTerm" Schema="dbo" store:Type="Tables" />
@@ -394,7 +394,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Doer">
           <Key>
             <PropertyRef Name="Id" />
@@ -417,7 +417,7 @@
           <Property Name="Selected_From_Date" Type="DateTime" Precision="0" />
           <Property Name="Selected_To_Date" Type="DateTime" Precision="0" />
           <Property Name="Selected_Prior_Id" Type="Int32" />
-          <Property Name="Selected_Tag_Id" Type="Int32" Nullable="false" />
+          <Property Name="Selected_Tag_Id" Type="Int32" />
           <Property Name="Is_Only_Favorites" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TaskPriority" Relationship="Self.ListFilter_fk0" FromRole="ListFilter" ToRole="TaskPriority" />
           <NavigationProperty Name="TaskTag" Relationship="Self.ListFilter_fk1" FromRole="ListFilter" ToRole="TaskTag" />
@@ -593,7 +593,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ListFilter_fk1">
-          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="1" />
+          <End Role="TaskTag" Type="Self.TaskTag" Multiplicity="0..1" />
           <End Role="ListFilter" Type="Self.ListFilter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaskTag">
@@ -701,7 +701,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TaskItem_fk4">
-          <End Role="TaskStatus" Type="DbModel.TaskStatus" Multiplicity="1" />
+          <End Role="TaskStatus" Type="Entities.TaskStatus" Multiplicity="1" />
           <End Role="TaskItem" Type="Self.TaskItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaskStatus">
@@ -746,7 +746,7 @@
           <EntitySet Name="TaskLists" EntityType="Self.TaskList" />
           <EntitySet Name="TaskPriorities" EntityType="Self.TaskPriority" />
           <EntitySet Name="TaskSchedules" EntityType="Self.TaskSchedule" />
-          <EntitySet Name="TaskStatus1" EntityType="DbModel.TaskStatus" />
+          <EntitySet Name="TaskStatus1" EntityType="Entities.TaskStatus" />
           <EntitySet Name="TaskTags" EntityType="Self.TaskTag" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="Doer_fk0" Association="Self.Doer_fk0">
@@ -815,9 +815,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DbModelStoreContainer" CdmEntityContainer="WtmDb">
+        <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="WtmDb">
           <EntitySetMapping Name="Doers">
-            <EntityTypeMapping TypeName="DbModel.Doer">
+            <EntityTypeMapping TypeName="Entities.Doer">
               <MappingFragment StoreEntitySet="Doer">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -826,7 +826,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ListFilters">
-            <EntityTypeMapping TypeName="DbModel.ListFilter">
+            <EntityTypeMapping TypeName="Entities.ListFilter">
               <MappingFragment StoreEntitySet="ListFilter">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Is_Show_Completed" ColumnName="Is_Show_Completed" />
@@ -842,7 +842,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RepeatTerms">
-            <EntityTypeMapping TypeName="DbModel.RepeatTerm">
+            <EntityTypeMapping TypeName="Entities.RepeatTerm">
               <MappingFragment StoreEntitySet="RepeatTerm">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Repeat_Term" ColumnName="Repeat_Term" />
@@ -850,7 +850,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subtasks">
-            <EntityTypeMapping TypeName="DbModel.Subtask">
+            <EntityTypeMapping TypeName="Entities.Subtask">
               <MappingFragment StoreEntitySet="Subtask">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -861,7 +861,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskFiles">
-            <EntityTypeMapping TypeName="DbModel.TaskFile">
+            <EntityTypeMapping TypeName="Entities.TaskFile">
               <MappingFragment StoreEntitySet="TaskFile">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -873,7 +873,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskItems">
-            <EntityTypeMapping TypeName="DbModel.TaskItem">
+            <EntityTypeMapping TypeName="Entities.TaskItem">
               <MappingFragment StoreEntitySet="TaskItem">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -893,7 +893,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskLists">
-            <EntityTypeMapping TypeName="DbModel.TaskList">
+            <EntityTypeMapping TypeName="Entities.TaskList">
               <MappingFragment StoreEntitySet="TaskList">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -907,7 +907,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskPriorities">
-            <EntityTypeMapping TypeName="DbModel.TaskPriority">
+            <EntityTypeMapping TypeName="Entities.TaskPriority">
               <MappingFragment StoreEntitySet="TaskPriority">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -916,7 +916,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskSchedules">
-            <EntityTypeMapping TypeName="DbModel.TaskSchedule">
+            <EntityTypeMapping TypeName="Entities.TaskSchedule">
               <MappingFragment StoreEntitySet="TaskSchedule">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Start_Term" ColumnName="Start_Term" />
@@ -928,7 +928,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskStatus1">
-            <EntityTypeMapping TypeName="DbModel.TaskStatus">
+            <EntityTypeMapping TypeName="Entities.TaskStatus">
               <MappingFragment StoreEntitySet="TaskStatus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -936,7 +936,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaskTags">
-            <EntityTypeMapping TypeName="DbModel.TaskTag">
+            <EntityTypeMapping TypeName="Entities.TaskTag">
               <MappingFragment StoreEntitySet="TaskTag">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -944,7 +944,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="DbModel.User">
+            <EntityTypeMapping TypeName="Entities.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

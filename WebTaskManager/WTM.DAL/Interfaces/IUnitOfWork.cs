@@ -3,7 +3,7 @@ using WTM.DAL.Entities;
 
 namespace WTM.DAL.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<User> Users { get; }
         IRepository<Doer> Doers { get; }
