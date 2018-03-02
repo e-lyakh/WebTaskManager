@@ -23,7 +23,7 @@ namespace WTM.BLL.Services
         {
             ListFilter listFilter = new ListFilter
             {
-                Is_Show_Completed = false,
+                Is_Show_Completed = false, // or initialization shuold be by DTO ?
                 Is_Ordered_Term = false,
                 Is_Ordered_Prior = false,
                 Is_Ordered_Tag = false,

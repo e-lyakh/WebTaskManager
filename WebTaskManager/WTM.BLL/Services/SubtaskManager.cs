@@ -10,61 +10,63 @@ using WTM.BLL.Interfaces;
 
 namespace WTM.BLL.Services
 {
-    public class DoerManager : IDoerManager
+    public class SubtaskManager : ISubtaskManager
     {
         IUnitOfWork db { get; set; }
 
-        public DoerManager(IUnitOfWork uow)
+        public SubtaskManager(IUnitOfWork uow)
         {
             db = uow;
         }
 
-        public void CreateDoer(DoerDTO doerDTO)
+        public void CreateSubtask(SubtaskDTO subtaskDTO)
         {
-            Doer doer = new Doer
+            Subtask subtask = new Subtask
             {
-                Name = doerDTO.Name,
-                User_Id = doerDTO.User_Id
+                Name = subtaskDTO.Name,
+                Order_In_List = subtaskDTO.Order_In_List,
+                Is_Completed = false,
+                Task_Id = subtaskDTO.Task_Id
             };
-            db.Doers.Create(doer);
+            db.Subtasks.Create(subtask);
             db.Save();
         }
 
-        public DoerDTO GetDoer(int? id)
+        public SubtaskDTO GetSubtask(int? id)
         {
             if (id == null)
-                throw new ValidationException("Id of Doer is not set", "");
-            var doer = db.Doers.Get(id.Value);
-            if (doer == null)
-                throw new ValidationException("Doer is not found (to get)", "");
-            Mapper.Initialize(cfg => cfg.CreateMap<Doer, DoerDTO>());
-            return Mapper.Map<Doer, DoerDTO>(doer);
+                throw new ValidationException("Id of Subtask is not set", "");
+            var subtask = db.Subtasks.Get(id.Value);
+            if (subtask == null)
+                throw new ValidationException("Subtask is not found (to get)", "");
+            Mapper.Initialize(cfg => cfg.CreateMap<Subtask, SubtaskDTO>());
+            return Mapper.Map<Subtask, SubtaskDTO>(subtask);
 
         }
 
-        public void UpdateDoer(DoerDTO doerDTO)
+        public void UpdateSubtask(SubtaskDTO subtaskDTO)
         {
-            var doer = db.Doers.Get(doerDTO.Id);
-            if (doer == null)
-                throw new ValidationException("Doer is not found (to update)", "");
-            Mapper.Initialize(cfg => cfg.CreateMap<Doer, DoerDTO>());
-            db.Doers.Update(doer);
+            var subtask = db.Subtasks.Get(subtaskDTO.Id);
+            if (subtask == null)
+                throw new ValidationException("Subtask is not found (to update)", "");
+            Mapper.Initialize(cfg => cfg.CreateMap<Subtask, SubtaskDTO>());
+            db.Subtasks.Update(subtask);
             db.Save();
         }
 
-        public void DeleteDoer(DoerDTO doerDTO)
+        public void DeleteSubtask(SubtaskDTO subtaskDTO)
         {
-            Doer doer = db.Doers.Get(doerDTO.Id);
-            if (doer == null)
-                throw new ValidationException("Doer is not found (to delete)", "");
-            db.Doers.Delete(doer.Id);
+            Subtask subtask = db.Subtasks.Get(subtaskDTO.Id);
+            if (subtask == null)
+                throw new ValidationException("Subtask is not found (to delete)", "");
+            db.Subtasks.Delete(subtask.Id);
             db.Save();
         }                
 
-        public IEnumerable<DoerDTO> GetDoers()
+        public IEnumerable<SubtaskDTO> GetSubtasks()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Doer, DoerDTO>());
-            return Mapper.Map<IEnumerable<Doer>, List<DoerDTO>>(db.Doers.GetAll());
+            Mapper.Initialize(cfg => cfg.CreateMap<Subtask, SubtaskDTO>());
+            return Mapper.Map<IEnumerable<Subtask>, List<SubtaskDTO>>(db.Subtasks.GetAll());
         }
 
         public void Dispose()

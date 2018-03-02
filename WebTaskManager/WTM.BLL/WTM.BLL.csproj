@@ -70,6 +70,14 @@
     <Compile Include="Interfaces\IDoerManager.cs" />
     <Compile Include="Interfaces\IUserHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserManager.cs" />
+    <Compile Include="Services\TaskTagManager.cs" />
+    <Compile Include="Services\TaskStatusManager.cs" />
+    <Compile Include="Services\TaskScheduleManager.cs" />
+    <Compile Include="Services\TaskPriorityManager.cs" />
+    <Compile Include="Services\TaskListManager.cs" />
+    <Compile Include="Services\TaskItemManager.cs" />
+    <Compile Include="Services\TaskFileManager.cs" />
     <Compile Include="Services\SubtaskManager.cs" />
     <Compile Include="Services\RepeatTermManager.cs" />
     <Compile Include="Services\ListFilterManager.cs" />

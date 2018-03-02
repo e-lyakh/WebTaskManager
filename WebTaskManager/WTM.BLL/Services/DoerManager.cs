@@ -39,7 +39,6 @@ namespace WTM.BLL.Services
                 throw new ValidationException("Doer is not found (to get)", "");
             Mapper.Initialize(cfg => cfg.CreateMap<Doer, DoerDTO>());
             return Mapper.Map<Doer, DoerDTO>(doer);
-
         }
 
         public void UpdateDoer(DoerDTO doerDTO)
