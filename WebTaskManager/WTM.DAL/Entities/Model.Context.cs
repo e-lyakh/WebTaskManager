@@ -34,7 +34,7 @@ namespace WTM.DAL.Entities
         public virtual DbSet<TaskList> TaskLists { get; set; }
         public virtual DbSet<TaskPriority> TaskPriorities { get; set; }
         public virtual DbSet<TaskSchedule> TaskSchedules { get; set; }
-        public virtual DbSet<TaskStatus> TaskStatuses { get; set; }
+        public virtual DbSet<TaskStatus> TaskStatus1 { get; set; }
         public virtual DbSet<TaskTag> TaskTags { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

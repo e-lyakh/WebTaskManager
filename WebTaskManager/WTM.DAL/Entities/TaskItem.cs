@@ -45,7 +45,7 @@ namespace WTM.DAL.Entities
         public virtual TaskSchedule TaskSchedule { get; set; }
         public virtual TaskPriority TaskPriority { get; set; }
         public virtual TaskTag TaskTag { get; set; }
-        public virtual TaskStatus TaskStatus { get; set; }
+        public virtual TaskStatus TaskStatu { get; set; }
         public virtual User User { get; set; }
     }
 }

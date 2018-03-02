@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,13 +45,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DoerDTO.cs" />
+    <Compile Include="DTO\ListFilterDTO.cs" />
+    <Compile Include="DTO\RepeatTermDTO.cs" />
+    <Compile Include="DTO\SubtaskDTO.cs" />
+    <Compile Include="DTO\TaskFileDTO.cs" />
+    <Compile Include="DTO\TaskItemDTO.cs" />
+    <Compile Include="DTO\TaskListDTO.cs" />
+    <Compile Include="DTO\TaskPriorityDTO.cs" />
+    <Compile Include="DTO\TaskScheduleDTO.cs" />
+    <Compile Include="DTO\TaskStatusDTO.cs" />
+    <Compile Include="DTO\TaskTagDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Infrastructure\ValidationException.cs" />
+    <Compile Include="Interfaces\IRepeatTermManager.cs" />
+    <Compile Include="Interfaces\ITaskStatusManager.cs" />
+    <Compile Include="Interfaces\ITaskFileManager.cs" />
+    <Compile Include="Interfaces\ISubtaskManager.cs" />
+    <Compile Include="Interfaces\ITaskTagManager.cs" />
+    <Compile Include="Interfaces\ITaskPriorityManager.cs" />
+    <Compile Include="Interfaces\ITaskScheduleManager.cs" />
+    <Compile Include="Interfaces\ITaskItemManager.cs" />
+    <Compile Include="Interfaces\IListFilterManager.cs" />
+    <Compile Include="Interfaces\ITaskListManager.cs" />
+    <Compile Include="Interfaces\IDoerManager.cs" />
+    <Compile Include="Interfaces\IUserHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SubtaskManager.cs" />
+    <Compile Include="Services\RepeatTermManager.cs" />
+    <Compile Include="Services\ListFilterManager.cs" />
+    <Compile Include="Services\DoerManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WTM.DAL\WTM.DAL.csproj">
       <Project>{c107f375-4a76-4079-b8f0-0a28067f16f4}</Project>
       <Name>WTM.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BusinessModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

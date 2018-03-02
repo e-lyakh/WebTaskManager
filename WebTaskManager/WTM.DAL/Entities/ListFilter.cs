@@ -28,7 +28,7 @@ namespace WTM.DAL.Entities
         public Nullable<System.DateTime> Selected_From_Date { get; set; }
         public Nullable<System.DateTime> Selected_To_Date { get; set; }
         public Nullable<int> Selected_Prior_Id { get; set; }
-        public int Selected_Tag_Id { get; set; }
+        public Nullable<int> Selected_Tag_Id { get; set; }
         public bool Is_Only_Favorites { get; set; }
     
         public virtual TaskPriority TaskPriority { get; set; }
