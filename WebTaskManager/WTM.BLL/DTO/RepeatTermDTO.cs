@@ -1,5 +1,4 @@
 ﻿
-
 namespace WTM.BLL.DTO
 {
     public class RepeatTermDTO

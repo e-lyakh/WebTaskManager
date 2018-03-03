@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace WTM.BLL.DTO
 {
     public class ListFilterDTO
